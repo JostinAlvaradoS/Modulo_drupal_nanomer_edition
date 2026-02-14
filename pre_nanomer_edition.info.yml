@@ -1,5 +1,5 @@
-name: Nanomer Edition 8
-description: Réplica del módulo Nanomer Edition con plantilla personalizada para NanoAndes
+name: Pre Nanomer Edition
+description: Modulo para gestionar los avisos previo a que suceda una nueva edición de nanomer
 type: module
 core_version_requirement: ^10 || ^11
 dependencies:

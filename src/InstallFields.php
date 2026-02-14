@@ -5,7 +5,7 @@
  * Create field storage and field instances for Nanomer Edition 4 module.
  */
 
-namespace Drupal\nanomer_edition_8;
+namespace Drupal\pre_nanomer_edition;
 
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
@@ -50,7 +50,7 @@ class InstallFields {
       $field_name_full = 'field_' . $field_name;
 
       try {
-        \Drupal::logger('nanomer_edition_8')->info('Creating field @name of type @type', [
+        \Drupal::logger('pre_nanomer_edition')->info('Creating field @name of type @type', [
           '@name' => $field_name_full,
           '@type' => $field_config['type'],
         ]);
@@ -65,17 +65,17 @@ class InstallFields {
             'cardinality' => $field_config['cardinality'],
           ]);
           $field_storage->save();
-          \Drupal::logger('nanomer_edition_8')->info('Field storage created: @name', ['@name' => $field_name_full]);
+          \Drupal::logger('pre_nanomer_edition')->info('Field storage created: @name', ['@name' => $field_name_full]);
         } else {
-          \Drupal::logger('nanomer_edition_8')->info('Field storage already exists: @name', ['@name' => $field_name_full]);
+          \Drupal::logger('pre_nanomer_edition')->info('Field storage already exists: @name', ['@name' => $field_name_full]);
         }
 
         // Crear field instance
-        $field = FieldConfig::loadByName('node', 'nanomer_edition_8', $field_name_full);
+        $field = FieldConfig::loadByName('node', 'pre_nanomer_edition', $field_name_full);
         if (!$field) {
           $field = FieldConfig::create([
             'field_storage' => $field_storage,
-            'bundle' => 'nanomer_edition_8',
+            'bundle' => 'pre_nanomer_edition',
             'label' => $field_config['label'],
             'required' => $field_config['required'],
             'translatable' => TRUE,
@@ -87,12 +87,12 @@ class InstallFields {
           }
           
           $field->save();
-          \Drupal::logger('nanomer_edition_8')->info('Field config created: @name', ['@name' => $field_name_full]);
+          \Drupal::logger('pre_nanomer_edition')->info('Field config created: @name', ['@name' => $field_name_full]);
         } else {
-          \Drupal::logger('nanomer_edition_8')->info('Field config already exists: @name', ['@name' => $field_name_full]);
+          \Drupal::logger('pre_nanomer_edition')->info('Field config already exists: @name', ['@name' => $field_name_full]);
         }
       } catch (\Exception $e) {
-        \Drupal::logger('nanomer_edition_8')->error('Error creating field @name: @error', [
+        \Drupal::logger('pre_nanomer_edition')->error('Error creating field @name: @error', [
           '@name' => $field_name_full,
           '@error' => $e->getMessage(),
         ]);
@@ -100,30 +100,30 @@ class InstallFields {
     }
 
     // Configurar display (form y view)
-    $entity_form_display = EntityFormDisplay::load('node.nanomer_edition_8.default');
+    $entity_form_display = EntityFormDisplay::load('node.pre_nanomer_edition.default');
     if (!$entity_form_display) {
       $entity_form_display = EntityFormDisplay::create([
         'targetEntityType' => 'node',
-        'bundle' => 'nanomer_edition_8',
+        'bundle' => 'pre_nanomer_edition',
         'mode' => 'default',
         'status' => TRUE,
       ]);
-      \Drupal::logger('nanomer_edition_8')->info('Created new EntityFormDisplay for nanomer_edition_8');
+      \Drupal::logger('pre_nanomer_edition')->info('Created new EntityFormDisplay for pre_nanomer_edition');
     } else {
-      \Drupal::logger('nanomer_edition_8')->info('Loaded existing EntityFormDisplay for nanomer_edition_8');
+      \Drupal::logger('pre_nanomer_edition')->info('Loaded existing EntityFormDisplay for pre_nanomer_edition');
     }
 
-    $entity_view_display = EntityViewDisplay::load('node.nanomer_edition_8.default');
+    $entity_view_display = EntityViewDisplay::load('node.pre_nanomer_edition.default');
     if (!$entity_view_display) {
       $entity_view_display = EntityViewDisplay::create([
         'targetEntityType' => 'node',
-        'bundle' => 'nanomer_edition_8',
+        'bundle' => 'pre_nanomer_edition',
         'mode' => 'default',
         'status' => TRUE,
       ]);
-      \Drupal::logger('nanomer_edition_8')->info('Created new EntityViewDisplay for nanomer_edition_8');
+      \Drupal::logger('pre_nanomer_edition')->info('Created new EntityViewDisplay for pre_nanomer_edition');
     } else {
-      \Drupal::logger('nanomer_edition_8')->info('Loaded existing EntityViewDisplay for nanomer_edition_8');
+      \Drupal::logger('pre_nanomer_edition')->info('Loaded existing EntityViewDisplay for pre_nanomer_edition');
     }
 
     // Configurar los widgets de formulario y vista
@@ -132,7 +132,7 @@ class InstallFields {
       $field_name_full = 'field_' . $field_name;
 
       try {
-        \Drupal::logger('nanomer_edition_8')->info('Configuring widget for @name (type: @type)', [
+        \Drupal::logger('pre_nanomer_edition')->info('Configuring widget for @name (type: @type)', [
           '@name' => $field_name_full,
           '@type' => $field_config['type'],
         ]);
@@ -148,7 +148,7 @@ class InstallFields {
             ],
             'region' => 'content',
           ]);
-          \Drupal::logger('nanomer_edition_8')->info('Image widget configured: @name', ['@name' => $field_name_full]);
+          \Drupal::logger('pre_nanomer_edition')->info('Image widget configured: @name', ['@name' => $field_name_full]);
         } elseif ($field_config['type'] === 'email') {
           $entity_form_display->setComponent($field_name_full, [
             'type' => 'email_default',
@@ -157,7 +157,7 @@ class InstallFields {
               'placeholder' => '',
             ],
           ]);
-          \Drupal::logger('nanomer_edition_8')->info('Email widget configured: @name', ['@name' => $field_name_full]);
+          \Drupal::logger('pre_nanomer_edition')->info('Email widget configured: @name', ['@name' => $field_name_full]);
         } else {
           $entity_form_display->setComponent($field_name_full, [
             'type' => $field_config['type'] === 'text_long' ? 'text_textarea' : 'text_textfield',
@@ -166,13 +166,13 @@ class InstallFields {
               'rows' => 4,
             ],
           ]);
-          \Drupal::logger('nanomer_edition_8')->info('Text widget configured: @name', ['@name' => $field_name_full]);
+          \Drupal::logger('pre_nanomer_edition')->info('Text widget configured: @name', ['@name' => $field_name_full]);
         }
 
         // View display - hide all fields (usaremos plantilla personalizada)
         $entity_view_display->removeComponent($field_name_full);
       } catch (\Exception $e) {
-        \Drupal::logger('nanomer_edition_8')->error('Error configuring widget for @name: @error', [
+        \Drupal::logger('pre_nanomer_edition')->error('Error configuring widget for @name: @error', [
           '@name' => $field_name_full,
           '@error' => $e->getMessage(),
         ]);
@@ -182,14 +182,14 @@ class InstallFields {
     $entity_form_display->save();
     $entity_view_display->save();
     
-    \Drupal::logger('nanomer_edition_8')->info('Fields installation completed successfully');
+    \Drupal::logger('pre_nanomer_edition')->info('Fields installation completed successfully');
   }
 
   /**
    * Delete all fields created for the Nanomer Edition 4 content type.
    */
   public static function deleteFields() {
-    \Drupal::logger('nanomer_edition_8')->info('=== STARTING FIELD DELETION ===');
+    \Drupal::logger('pre_nanomer_edition')->info('=== STARTING FIELD DELETION ===');
 
     // Usar la misma definición de campos
     $secciones = [
@@ -220,42 +220,42 @@ class InstallFields {
     ];
 
     // PASO 1: Eliminar EntityFormDisplay y EntityViewDisplay (PRIMERO)
-    \Drupal::logger('nanomer_edition_8')->info('STEP 1: Deleting EntityFormDisplay and EntityViewDisplay');
+    \Drupal::logger('pre_nanomer_edition')->info('STEP 1: Deleting EntityFormDisplay and EntityViewDisplay');
     try {
-      $entity_form_display = EntityFormDisplay::load('node.nanomer_edition_8.default');
+      $entity_form_display = EntityFormDisplay::load('node.pre_nanomer_edition.default');
       if ($entity_form_display) {
         $entity_form_display->delete();
-        \Drupal::logger('nanomer_edition_8')->info('✓ EntityFormDisplay deleted successfully');
+        \Drupal::logger('pre_nanomer_edition')->info('✓ EntityFormDisplay deleted successfully');
       } else {
-        \Drupal::logger('nanomer_edition_8')->info('EntityFormDisplay not found');
+        \Drupal::logger('pre_nanomer_edition')->info('EntityFormDisplay not found');
       }
 
-      $entity_view_display = EntityViewDisplay::load('node.nanomer_edition_8.default');
+      $entity_view_display = EntityViewDisplay::load('node.pre_nanomer_edition.default');
       if ($entity_view_display) {
         $entity_view_display->delete();
-        \Drupal::logger('nanomer_edition_8')->info('✓ EntityViewDisplay deleted successfully');
+        \Drupal::logger('pre_nanomer_edition')->info('✓ EntityViewDisplay deleted successfully');
       } else {
-        \Drupal::logger('nanomer_edition_8')->info('EntityViewDisplay not found');
+        \Drupal::logger('pre_nanomer_edition')->info('EntityViewDisplay not found');
       }
     } catch (\Exception $e) {
-      \Drupal::logger('nanomer_edition_8')->error('Error deleting displays: @error', [
+      \Drupal::logger('pre_nanomer_edition')->error('Error deleting displays: @error', [
         '@error' => $e->getMessage(),
       ]);
     }
 
     // PASO 2: Eliminar FieldConfig (SEGUNDO)
-    \Drupal::logger('nanomer_edition_8')->info('STEP 2: Deleting FieldConfig instances');
+    \Drupal::logger('pre_nanomer_edition')->info('STEP 2: Deleting FieldConfig instances');
     foreach ($secciones as $field_name => $field_config) {
       $field_name_full = 'field_' . $field_name;
 
       try {
-        $field = FieldConfig::loadByName('node', 'nanomer_edition_8', $field_name_full);
+        $field = FieldConfig::loadByName('node', 'pre_nanomer_edition', $field_name_full);
         if ($field) {
           $field->delete();
-          \Drupal::logger('nanomer_edition_8')->info('✓ FieldConfig deleted: @name', ['@name' => $field_name_full]);
+          \Drupal::logger('pre_nanomer_edition')->info('✓ FieldConfig deleted: @name', ['@name' => $field_name_full]);
         }
       } catch (\Exception $e) {
-        \Drupal::logger('nanomer_edition_8')->error('Error deleting FieldConfig @name: @error', [
+        \Drupal::logger('pre_nanomer_edition')->error('Error deleting FieldConfig @name: @error', [
           '@name' => $field_name_full,
           '@error' => $e->getMessage(),
         ]);
@@ -263,7 +263,7 @@ class InstallFields {
     }
 
     // PASO 3: Eliminar FieldStorageConfig (TERCERO)
-    \Drupal::logger('nanomer_edition_8')->info('STEP 3: Deleting FieldStorageConfig definitions');
+    \Drupal::logger('pre_nanomer_edition')->info('STEP 3: Deleting FieldStorageConfig definitions');
     foreach ($secciones as $field_name => $field_config) {
       $field_name_full = 'field_' . $field_name;
 
@@ -271,17 +271,17 @@ class InstallFields {
         $field_storage = FieldStorageConfig::loadByName('node', $field_name_full);
         if ($field_storage) {
           $field_storage->delete();
-          \Drupal::logger('nanomer_edition_8')->info('✓ FieldStorage deleted: @name', ['@name' => $field_name_full]);
+          \Drupal::logger('pre_nanomer_edition')->info('✓ FieldStorage deleted: @name', ['@name' => $field_name_full]);
         }
       } catch (\Exception $e) {
-        \Drupal::logger('nanomer_edition_8')->error('Error deleting FieldStorage @name: @error', [
+        \Drupal::logger('pre_nanomer_edition')->error('Error deleting FieldStorage @name: @error', [
           '@name' => $field_name_full,
           '@error' => $e->getMessage(),
         ]);
       }
     }
 
-    \Drupal::logger('nanomer_edition_8')->info('=== FIELD DELETION COMPLETED ===');
+    \Drupal::logger('pre_nanomer_edition')->info('=== FIELD DELETION COMPLETED ===');
   }
 
 }

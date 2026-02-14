@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {}
+name: 'Pre Nanomer Edition'
+type: pre_nanomer_edition
+description: 'Avisos previos para la próxima edición de NanoAndes'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

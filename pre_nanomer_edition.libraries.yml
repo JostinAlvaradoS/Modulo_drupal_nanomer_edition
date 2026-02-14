@@ -1,0 +1,6 @@
+pre_nanomer_edition_styles:
+  css:
+    theme:
+      css/pre-nanomer-edition.css: {}
+  js:
+    js/pre-nanomer-edition.js: {}

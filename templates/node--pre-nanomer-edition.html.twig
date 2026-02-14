@@ -448,7 +448,7 @@
                 {% endfor %}
             </div>
             <div class="nano-nota">
-                <p><strong>Note:</strong> {{ node.field_nota_fechas.value | default('No second call will be made if the number of applications exceeds 200 candidates.') }}</p>
+                <p><strong>Note:</strong> {{ node.field_nota_fechas.value | default('No second call will be made if the number of applications exceeds 200 candidates.') | raw }}</p>
             </div>
         </section>
         <!-- Requisitos -->

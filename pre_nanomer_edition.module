@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Pre Nanomer Edition module.
+ */
+
+use Drupal\pre_nanomer_edition\InstallFields;
+
+/**
+ * Implements hook_install().
+ */
+function pre_nanomer_edition_install() {
+  // El content type se crea automáticamente desde config/install/node.type.pre_nanomer_edition.yml
+  // Aquí solo creamos los campos para el content type
+  \Drupal::logger('pre_nanomer_edition')->info('hook_install() called - starting field creation');
+  InstallFields::createFields();
+  \Drupal::logger('pre_nanomer_edition')->info('hook_install() completed');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function pre_nanomer_edition_uninstall() {
+  // Eliminar todos los campos creados programáticamente
+  \Drupal::logger('pre_nanomer_edition')->info('hook_uninstall() called - starting field deletion');
+  InstallFields::deleteFields();
+  // También eliminar la configuración del tipo de contenido si existe
+  try {
+    $config_factory = \Drupal::configFactory();
+    $config_name = 'node.type.pre_nanomer_edition';
+    $config_editable = $config_factory->getEditable($config_name);
+    if ($config_editable) {
+      $config_editable->delete();
+      \Drupal::logger('pre_nanomer_edition')->info('Deleted config: @c', ['@c' => $config_name]);
+    }
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('pre_nanomer_edition')->error('Error deleting config node type: @msg', ['@msg' => $e->getMessage()]);
+  }
+  \Drupal::logger('pre_nanomer_edition')->info('hook_uninstall() completed');
+}
+
+/**
+ * Implements hook_theme().
+ */
+function pre_nanomer_edition_theme($existing, $type, $theme, $path) {
+  return [
+    'node__pre_nanomer_edition' => [
+      'base hook' => 'node',
+      'path' => $path . '/templates',
+      'template' => 'node--pre-nanomer-edition',
+    ],
+  ];
+}
