@@ -417,22 +417,22 @@
     <!-- Header -->
     <div class="nano-header">
         <div class="container">
-            <h1>{{ node.field_hero_titulo.value | default('XIV International School NanoAndes') }}</h1>
-            <h2>{{ node.field_hero_descripcion.value | default('I Pedagogical School Nanomer 2025') }}</h2>
-            <p>Student Selection Guidelines</p>
+            <h1>{{ node.field_hero_titulo.value | default(('XIV International School NanoAndes') | t) }}</h1>
+            <h2>{{ node.field_hero_descripcion.value | default(('I Pedagogical School Nanomer 2025') | t) }}</h2>
+            <p>{{ 'Student Selection Guidelines' | t }}</p>
         </div>
     </div>
     <div class="nano-main">
         <!-- Objetivo -->
         <section class="nano-section">
             <div class="nano-objetivo">
-                <h3>School Objective</h3>
+                <h3>{{ 'School Objective' | t }}</h3>
                 <p>{{ node.field_objetivo_contenido.value | default('To strengthen the advanced training of Latin American students in the field of <span class=\"highlight\">nanotechnology applied to health, environment</span> and other strategic areas, through active participation in theoretical and practical sessions, lectures and scientific discussions.') | raw }}</p>
             </div>
         </section>
         <!-- Fechas Importantes -->
         <section class="nano-section nano-fechas">
-            <h3>Important Dates</h3>
+            <h3>{{ 'Important Dates' | t }}</h3>
             <div class="nano-grid-3">
                 {% for i, fecha in node.field_fechas_titulo %}
                     <div class="nano-card">
@@ -448,12 +448,12 @@
                 {% endfor %}
             </div>
             <div class="nano-nota">
-                <p><strong>Note:</strong> {{ node.field_nota_fechas.value | default('No second call will be made if the number of applications exceeds 200 candidates.') | raw }}</p>
+                <p><strong>{{ 'Note:' | t }}</strong> {{ node.field_nota_fechas.value | default('No second call will be made if the number of applications exceeds 200 candidates.' | t) | raw }}</p>
             </div>
         </section>
         <!-- Requisitos -->
         <section class="nano-section nano-requisitos">
-            <h3>Application Requirements</h3>
+            <h3>{{ 'Application Requirements' | t }}</h3>
             <div class="nano-grid-2">
                 {{ node.field_requisitos_contenido.value | raw }}
             </div>
@@ -461,7 +461,7 @@
         <!-- Documentos -->
         <section class="nano-section nano-documentos">
             <div style="background-color:white;border-radius:0.5rem;border:1px solid #e2e8f0;padding:2rem;">
-                <h3>Required Documents</h3>
+                <h3>{{ 'Required Documents' | t }}</h3>
                 <div class="nano-grid-4">
                     {% for i, documento in node.field_documentos_titulo %}
                         <div class="nano-card">
@@ -480,7 +480,7 @@
         </section>
         <!-- Procedimiento -->
         <section class="nano-section">
-            <h3>Application Procedure</h3>
+            <h3>{{ 'Application Procedure' | t }}</h3>
             <div class="nano-card">
                 <div class="nano-card-content" style="padding:2.5rem;text-align:center;">
                     <div style="font-size:3rem;margin-bottom:1.5rem;">📝</div>
@@ -492,7 +492,7 @@
         </section>
         <!-- Criterios -->
         <section class="nano-section nano-criterios">
-            <h3>Selection Criteria</h3>
+            <h3>{{ 'Selection Criteria' | t }}</h3>
             <div class="nano-card">
                 <div class="nano-card-content" style="padding:2rem;">
                     {{ node.field_criterios_contenido.value | raw }}
@@ -502,7 +502,7 @@
         <!-- Becas -->
         <section class="nano-section">
             <div class="nano-becas">
-                <h3>Scholarships and Benefits</h3>
+                <h3>{{ 'Scholarships and Benefits' | t }}</h3>
                 <div style="margin:0 auto;max-width:600px;">
                     {{ node.field_becas_contenido.value | raw }}
                 </div>
@@ -510,7 +510,7 @@
         </section>
         <!-- Compromisos -->
         <section class="nano-section nano-compromisos">
-            <h3>Selected Students' Commitments</h3>
+            <h3>{{ 'Selected Students\' Commitments' | t }}</h3>
             <div class="nano-grid-2">
                 {% for compromiso in node.field_compromisos_descripcion %}
                     <div class="nano-card">
@@ -525,11 +525,11 @@
         <section class="nano-section">
             <div class="nano-contacto">
                 <div style="font-size:2.5rem;margin-bottom:1rem;">✉️</div>
-                <h3>Have Questions?</h3>
-                <p style="color:#64748b;font-size:1.3rem;margin-bottom:1rem;">For any questions or inquiries, don't hesitate to contact us</p>
+                <h3>{{ 'Have Questions?' | t }}</h3>
+                <p style="color:#64748b;font-size:1.3rem;margin-bottom:1rem;">{{ 'For any questions or inquiries, don\'t hesitate to contact us' | t }}</p>
                 <div class="email">{{ node.field_contacto_email.value | default('nanoandeschile@gmail.com') }}</div>
                 <div class="footer-info">
-                    <p>{{ node.field_contacto_contenido.value | default('XIV International School NanoAndes Organizing Committee<br>Scientific and Student Selection Committee') | raw }}</p>
+                    <p>{{ node.field_contacto_contenido.value | default(('XIV International School NanoAndes Organizing Committee<br>Scientific and Student Selection Committee') | t) | raw }}</p>
                 </div>
             </div>
         </section>
