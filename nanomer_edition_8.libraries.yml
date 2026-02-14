@@ -1,0 +1,6 @@
+nanomer_edition_8_styles:
+  css:
+    theme:
+      css/nanomer-edition-8.css: {}
+  js:
+    js/nanomer-edition-8.js: {}

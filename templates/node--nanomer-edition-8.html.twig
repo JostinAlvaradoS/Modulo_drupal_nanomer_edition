@@ -1,0 +1,537 @@
+{#
+/**
+ * @file
+ * Custom theme implementation for Nanomer Edition 4 node.
+ * Renders the exact HTML structure from the NanoAndes template with Drupal fields.
+ */
+#}
+
+<!-- Content for Drupal - Full Page Full HTML - English Version -->
+<style>
+/* Drupal Full HTML compatibility - scoped styles */
+.nanoandes-content * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.nanoandes-content {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.7;
+    color: #333;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 30px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    font-size: 18px;
+}
+/* Header */
+.nanoandes-content .nano-header {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border: 1px solid #cbd5e1;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+}
+.nanoandes-content .nano-header .container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+.nanoandes-content .nano-header h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+.nanoandes-content .nano-header h2 {
+    font-size: 1.8rem;
+    color: #2563eb;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+.nanoandes-content .nano-header p {
+    color: #64748b;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+/* Main Content */
+.nanoandes-content .nano-main {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+.nanoandes-content .nano-section {
+    margin-bottom: 4rem;
+}
+.nanoandes-content .nano-section h3 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #1f2937;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    line-height: 1.3;
+}
+/* Objetivo */
+.nanoandes-content .nano-objetivo {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+.nanoandes-content .nano-objetivo p {
+    font-size: 1.6rem;
+    color: #4b5563;
+    line-height: 1.8;
+    font-weight: 400;
+}
+.nanoandes-content .nano-objetivo .highlight {
+    font-weight: 600;
+    color: #2563eb;
+}
+/* Cards */
+.nanoandes-content .nano-card {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    overflow: hidden;
+}
+.nanoandes-content .nano-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.nanoandes-content .nano-card-header {
+    padding: 2rem 2rem 1rem;
+}
+.nanoandes-content .nano-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.nanoandes-content .nano-card-content {
+    padding: 0 2rem 2rem;
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+/* Grid layouts */
+.nanoandes-content .nano-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+.nanoandes-content .nano-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 1rem;
+}
+.nanoandes-content .nano-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+/* Fechas importantes */
+.nanoandes-content .nano-fechas .nano-card {
+    border-left: 4px solid #64748b;
+}
+.nanoandes-content .nano-fechas .nano-card-content .fecha {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #334155;
+    margin-bottom: 0.75rem;
+}
+.nanoandes-content .nano-fechas .nano-card-content .descripcion {
+    font-size: 1.2rem;
+    color: #64748b;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+}
+/* Badges */
+.nanoandes-content .nano-badge {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    margin-top: 0.75rem;
+}
+.nanoandes-content .nano-badge-secondary {
+    background-color: #f1f5f9;
+    color: #334155;
+}
+.nanoandes-content .nano-badge-outline {
+    background-color: transparent;
+    border: 1px solid #64748b;
+    color: #475569;
+}
+/* Nota especial */
+.nanoandes-content .nano-nota {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.75rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.nanoandes-content .nano-nota p {
+    color: #374151;
+    text-align: center;
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+/* Requisitos */
+.nanoandes-content .nano-requisitos .nano-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.nanoandes-content .nano-requisitos .nano-list-item p {
+    font-size: 1.4rem;
+    line-height: 1.7;
+    margin: 0;
+}
+.nanoandes-content .nano-requisitos .bullet {
+    width: 0.6rem;
+    height: 0.6rem;
+    background-color: #64748b;
+    border-radius: 50%;
+    margin-top: 0.7rem;
+    flex-shrink: 0;
+}
+.nanoandes-content .nano-requisitos .nota-especial {
+    padding: 1rem;
+    background-color: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.75rem;
+    margin-top: 1.5rem;
+}
+.nanoandes-content .nano-requisitos .nota-especial p {
+    font-size: 1.3rem;
+    color: #475569;
+    margin: 0;
+    font-weight: 500;
+}
+/* Áreas de investigación */
+.nanoandes-content .nano-areas .area-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding: 0.5rem 0;
+}
+.nanoandes-content .nano-areas .area-item span {
+    font-size: 1.3rem;
+    color: #374151;
+    font-weight: 500;
+}
+/* Documentos */
+.nanoandes-content .nano-documentos .doc-item {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+}
+.nanoandes-content .nano-documentos .doc-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.nanoandes-content .nano-documentos .doc-icon-bg {
+    padding: 1rem;
+    background-color: #f1f5f9;
+    border-radius: 50%;
+}
+.nanoandes-content .nano-documentos .doc-title {
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+    font-size: 1.4rem;
+}
+.nanoandes-content .nano-documentos .doc-desc {
+    font-size: 1.2rem;
+    color: #64748b;
+    font-weight: 500;
+}
+/* Criterios de selección */
+.nanoandes-content .nano-criterios .criterio-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 0;
+}
+.nanoandes-content .nano-criterios .criterio-item span {
+    color: #334155;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+/* Becas */
+.nanoandes-content .nano-becas {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    text-align: center;
+}
+.nanoandes-content .nano-becas h4 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1rem;
+}
+.nanoandes-content .nano-becas p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+/* Compromisos */
+.nanoandes-content .nano-compromisos .compromiso-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.nanoandes-content .nano-compromisos .compromiso-item span {
+    color: #334155;
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.6;
+}
+/* Contacto */
+.nanoandes-content .nano-contacto {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 2.5rem;
+    text-align: center;
+}
+.nanoandes-content .nano-contacto h3 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1rem;
+}
+.nanoandes-content .nano-contacto p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+.nanoandes-content .nano-contacto .email {
+    color: #2563eb;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+.nanoandes-content .nano-contacto .footer-info {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+.nanoandes-content .nano-contacto .footer-info p {
+    font-size: 1.1rem;
+    color: #64748b;
+    font-weight: 500;
+}
+/* Icons (usando símbolos Unicode) */
+.nanoandes-content .nano-icon {
+    width: 1.7rem;
+    height: 1.7rem;
+    display: inline-block;
+    text-align: center;
+    font-size: 1.4rem;
+}
+.nanoandes-content .nano-icon-blue { color: #2563eb; }
+.nanoandes-content .nano-icon-slate { color: #64748b; }
+.nanoandes-content .nano-icon-red { color: #dc2626; }
+.nanoandes-content .nano-icon-green { color: #16a34a; }
+/* Responsive */
+@media (max-width: 768px) {
+    .nanoandes-content {
+        padding: 20px 15px;
+        font-size: 16px;
+    }
+    
+    .nanoandes-content .nano-header {
+        padding: 2rem 1.5rem;
+    }
+    
+    .nanoandes-content .nano-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .nanoandes-content .nano-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .nanoandes-content .nano-header p {
+        font-size: 1rem;
+    }
+    
+    .nanoandes-content .nano-section h3 {
+        font-size: 2.2rem;
+    }
+    
+    .nanoandes-content .nano-objetivo p {
+        font-size: 1.4rem;
+    }
+    
+    .nanoandes-content .nano-grid-3, 
+    .nanoandes-content .nano-grid-2, 
+    .nanoandes-content .nano-grid-4 {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .nanoandes-content .nano-card-header {
+        padding: 1.5rem 1.5rem 0.75rem;
+    }
+    
+    .nanoandes-content .nano-card-content {
+        padding: 0 1.5rem 1.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .nanoandes-content .nano-card-title {
+        font-size: 1.3rem;
+    }
+}
+</style>
+
+<div{{ attributes.addClass('nanoandes-content') }}>
+    <!-- Header -->
+    <div class="nano-header">
+        <div class="container">
+            <h1>{{ node.field_hero_titulo.value | default('XIV International School NanoAndes') }}</h1>
+            <h2>{{ node.field_hero_descripcion.value | default('I Pedagogical School Nanomer 2025') }}</h2>
+            <p>Student Selection Guidelines</p>
+        </div>
+    </div>
+    <div class="nano-main">
+        <!-- Objetivo -->
+        <section class="nano-section">
+            <div class="nano-objetivo">
+                <h3>School Objective</h3>
+                <p>{{ node.field_objetivo_contenido.value | default('To strengthen the advanced training of Latin American students in the field of <span class=\"highlight\">nanotechnology applied to health, environment</span> and other strategic areas, through active participation in theoretical and practical sessions, lectures and scientific discussions.') | raw }}</p>
+            </div>
+        </section>
+        <!-- Fechas Importantes -->
+        <section class="nano-section nano-fechas">
+            <h3>Important Dates</h3>
+            <div class="nano-grid-3">
+                {% for i, fecha in node.field_fechas_titulo %}
+                    <div class="nano-card">
+                        <div class="nano-card-header">
+                            <div class="nano-card-title">📅 {{ fecha.value }}</div>
+                        </div>
+                        <div class="nano-card-content">
+                            {% if node.field_fechas_descripcion[i] %}
+                                {{ node.field_fechas_descripcion[i].value }}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="nano-nota">
+                <p><strong>Note:</strong> {{ node.field_nota_fechas.value | default('No second call will be made if the number of applications exceeds 200 candidates.') }}</p>
+            </div>
+        </section>
+        <!-- Requisitos -->
+        <section class="nano-section nano-requisitos">
+            <h3>Application Requirements</h3>
+            <div class="nano-grid-2">
+                {{ node.field_requisitos_contenido.value | raw }}
+            </div>
+        </section>
+        <!-- Documentos -->
+        <section class="nano-section nano-documentos">
+            <div style="background-color:white;border-radius:0.5rem;border:1px solid #e2e8f0;padding:2rem;">
+                <h3>Required Documents</h3>
+                <div class="nano-grid-4">
+                    {% for i, documento in node.field_documentos_titulo %}
+                        <div class="nano-card">
+                            <div class="nano-card-header">
+                                <div class="nano-card-title">📄 {{ documento.value }}</div>
+                            </div>
+                            <div class="nano-card-content">
+                                {% if node.field_documentos_descripcion[i] %}
+                                    {{ node.field_documentos_descripcion[i].value }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <!-- Procedimiento -->
+        <section class="nano-section">
+            <h3>Application Procedure</h3>
+            <div class="nano-card">
+                <div class="nano-card-content" style="padding:2.5rem;text-align:center;">
+                    <div style="font-size:3rem;margin-bottom:1.5rem;">📝</div>
+                    <div style="margin:0 auto;max-width:700px;">
+                        {{ node.field_procedimiento_contenido.value | raw }}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Criterios -->
+        <section class="nano-section nano-criterios">
+            <h3>Selection Criteria</h3>
+            <div class="nano-card">
+                <div class="nano-card-content" style="padding:2rem;">
+                    {{ node.field_criterios_contenido.value | raw }}
+                </div>
+            </div>
+        </section>
+        <!-- Becas -->
+        <section class="nano-section">
+            <div class="nano-becas">
+                <h3>Scholarships and Benefits</h3>
+                <div style="margin:0 auto;max-width:600px;">
+                    {{ node.field_becas_contenido.value | raw }}
+                </div>
+            </div>
+        </section>
+        <!-- Compromisos -->
+        <section class="nano-section nano-compromisos">
+            <h3>Selected Students' Commitments</h3>
+            <div class="nano-grid-2">
+                {% for compromiso in node.field_compromisos_descripcion %}
+                    <div class="nano-card">
+                        <div class="nano-card-content">
+                            <div style="font-size:1rem;line-height:1.6;">{{ compromiso.value }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+        <!-- Contacto -->
+        <section class="nano-section">
+            <div class="nano-contacto">
+                <div style="font-size:2.5rem;margin-bottom:1rem;">✉️</div>
+                <h3>Have Questions?</h3>
+                <p style="color:#64748b;font-size:1.3rem;margin-bottom:1rem;">For any questions or inquiries, don't hesitate to contact us</p>
+                <div class="email">{{ node.field_contacto_email.value | default('nanoandeschile@gmail.com') }}</div>
+                <div class="footer-info">
+                    <p>{{ node.field_contacto_contenido.value | default('XIV International School NanoAndes Organizing Committee<br>Scientific and Student Selection Committee') | raw }}</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

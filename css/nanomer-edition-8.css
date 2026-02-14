@@ -1,0 +1,84 @@
+/* Nanomer Edition 4 - Additional Styles */
+
+/* Ensure clean appearance */
+body.node--nanomer-edition-4 {
+    background-color: #f8f9fa;
+}
+
+/* Content width management */
+.nanoandes-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Form styling when editing */
+.node-form.nanomer_edition_4-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.node-form.nanomer_edition_4-form .form-group {
+    margin-bottom: 20px;
+}
+
+.node-form.nanomer_edition_4-form label {
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.node-form.nanomer_edition_4-form textarea,
+.node-form.nanomer_edition_4-form input[type="text"],
+.node-form.nanomer_edition_4-form input[type="email"] {
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 10px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.node-form.nanomer_edition_4-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.node-form.nanomer_edition_4-form textarea:focus,
+.node-form.nanomer_edition_4-form input[type="text"]:focus,
+.node-form.nanomer_edition_4-form input[type="email"]:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Content editor styling */
+.form-item .text-summary {
+    background-color: #f8fafc;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+/* Image upload styling */
+.image-widget {
+    margin: 15px 0;
+}
+
+.image-widget .form-managed-file {
+    background-color: #f8fafc;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px dashed #cbd5e1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .nanoandes-content {
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    .node-form.nanomer_edition_4-form {
+        padding: 15px;
+    }
+}

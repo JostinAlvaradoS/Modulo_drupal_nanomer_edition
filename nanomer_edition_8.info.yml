@@ -1,0 +1,12 @@
+name: Nanomer Edition 8
+description: Réplica del módulo Nanomer Edition con plantilla personalizada para NanoAndes
+type: module
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:node
+  - drupal:text
+  - drupal:field
+  - drupal:options
+  - drupal:ckeditor5
+  - drupal:image
+  - drupal:file

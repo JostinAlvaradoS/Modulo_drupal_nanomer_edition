@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {}
+name: 'Nanomer Edition 8'
+type: nanomer_edition_8
+description: 'Contenido para la Escuela NanoAndes - Edición 5 con secciones editables y dinámicas'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false
