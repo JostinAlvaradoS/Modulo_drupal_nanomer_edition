@@ -25,6 +25,19 @@ function nanomer_edition_8_uninstall() {
   // Eliminar todos los campos creados programáticamente
   \Drupal::logger('nanomer_edition_8')->info('hook_uninstall() called - starting field deletion');
   InstallFields::deleteFields();
+  // También eliminar la configuración del tipo de contenido si existe
+  try {
+    $config_factory = \Drupal::configFactory();
+    $config_name = 'node.type.nanomer_edition_8';
+    $config_editable = $config_factory->getEditable($config_name);
+    if ($config_editable) {
+      $config_editable->delete();
+      \Drupal::logger('nanomer_edition_8')->info('Deleted config: @c', ['@c' => $config_name]);
+    }
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('nanomer_edition_8')->error('Error deleting config node type: @msg', ['@msg' => $e->getMessage()]);
+  }
   \Drupal::logger('nanomer_edition_8')->info('hook_uninstall() completed');
 }
 
