@@ -427,7 +427,7 @@
         <section class="nano-section">
             <div class="nano-objetivo">
                 <h3>{{ 'School Objective' | t }}</h3>
-                <p>{{ node.field_objetivo_contenido.value | default('To strengthen the advanced training of Latin American students in the field of <span class=\"highlight\">nanotechnology applied to health, environment</span> and other strategic areas, through active participation in theoretical and practical sessions, lectures and scientific discussions.') | raw }}</p>
+                <p>{{ node.field_objetivo_contenido.value | default(('To strengthen the advanced training of Latin American students in the field of <span class=\"highlight\">nanotechnology applied to health, environment</span> and other strategic areas, through active participation in theoretical and practical sessions, lectures and scientific discussions.') | t) | raw }}</p>
             </div>
         </section>
         <!-- Fechas Importantes -->

@@ -1,0 +1,58 @@
+# French translation for Pre Nanomer Edition module
+# Copyright (C) 2026 NanoAndes
+# This file is distributed under the same license as the Pre Nanomer Edition module package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pre Nanomer Edition 8.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Important Dates"
+msgstr "Dates Importantes"
+
+msgid "Note:"
+msgstr "Remarque :"
+
+msgid "Application Requirements"
+msgstr "Exigences de Candidature"
+
+msgid "Required Documents"
+msgstr "Documents Requis"
+
+msgid "Application Procedure"
+msgstr "Procédure de Candidature"
+
+msgid "Selection Criteria"
+msgstr "Critères de Sélection"
+
+msgid "Scholarships and Benefits"
+msgstr "Bourses et Avantages"
+
+msgid "Selected Students' Commitments"
+msgstr "Engagements des Étudiants Sélectionnés"
+
+msgid "Have Questions?"
+msgstr "Avez-vous des Questions ?"
+
+msgid "For any questions or inquiries, don't hesitate to contact us"
+msgstr "Pour toute question ou demande, n'hésitez pas à nous contacter"
+
+msgid "Student Selection Guidelines"
+msgstr "Directives de Sélection des Étudiants"
+
+msgid "School Objective"
+msgstr "Objectif de l'École"
+
+msgid "XIV International School NanoAndes"
+msgstr "XIV École Internationale NanoAndes"
+
+msgid "I Pedagogical School Nanomer 2025"
+msgstr "I École Pédagogique Nanomer 2025"
+
+msgid "No second call will be made if the number of applications exceeds 200 candidates."
+msgstr "Aucun deuxième appel ne sera lancé si le nombre de candidatures dépasse 200 candidats."
+
+msgid "XIV International School NanoAndes Organizing Committee<br>Scientific and Student Selection Committee"
+msgstr "Comité d'Organisation de l'École Internationale NanoAndes XIV<br>Comité de Sélection Scientifique et Étudiante"
