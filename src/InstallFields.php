@@ -49,6 +49,8 @@ class InstallFields {
       // Compromisos
       'compromisos_descripcion' => ['label' => 'Compromisos - Descripción', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
       
+      'edicion_imagen' => ['label' => 'Imagen de la Edición', 'type' => 'image', 'cardinality' => 1, 'required' => FALSE],
+      
       'contacto_email' => ['label' => 'Contacto - Email', 'type' => 'string', 'cardinality' => 1, 'required' => FALSE],
       'contacto_contenido' => ['label' => 'Contacto - Información Adicional', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
     ];
