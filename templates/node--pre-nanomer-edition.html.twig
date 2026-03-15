@@ -634,5 +634,72 @@
                 </div>
             </div>
         </section>
+
+        {# Instituciones de Apoyo (Carrusel de Logos) - PRE VERSION #}
+        {% set support_groups = [
+            {'title': 'Instituciones que hacen posible esta edición', 'field': node.field_support_enabling_pre},
+            {'title': 'Auspiciadores', 'field': node.field_support_sponsors_pre},
+            {'title': 'Instituciones colaboradoras', 'field': node.field_support_collaborating_pre}
+        ] %}
+
+        {% for group in support_groups %}
+            {% if group.field|length > 0 %}
+                <section class="nano-section">
+                    <h3 style="font-size: 2.2rem; margin-bottom: 2rem;">{{ group.title | t }}</h3>
+                    <div class="logo-carousel-container">
+                        <div class="logo-track">
+                            {# Duplicamos los logos 3 veces para asegurar que el carrusel sea fluido #}
+                            {% for i in 1..3 %}
+                                {% for item in group.field %}
+                                    {% if item.entity %}
+                                        <div class="logo-item">
+                                            <img src="{{ file_url(item.entity.fileuri) }}" alt="Logo" class="support-logo">
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+        {% endfor %}
     </div>
 </div>
+
+<style>
+.logo-carousel-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px 0;
+    position: relative;
+    background: transparent;
+}
+.logo-track {
+    display: flex;
+    width: max-content;
+    animation: scrollLogos 40s linear infinite;
+    align-items: center;
+}
+.logo-item {
+    padding: 0 40px;
+    flex: 0 0 auto;
+}
+.support-logo {
+    max-height: 80px;
+    width: auto;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+.support-logo:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+}
+@keyframes scrollLogos {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.33%); }
+}
+</style>
