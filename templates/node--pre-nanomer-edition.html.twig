@@ -279,6 +279,20 @@
     font-size: 1.3rem;
     font-weight: 500;
 }
+.nano-criteria-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+}
+.nano-criteria-item {
+    background: white;
+    border-radius: 0.5rem;
+    border: 1px solid #e2e8f0;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(15, 23, 42, 0.08);
+}
 /* Becas */
 .nanoandes-content .nano-becas {
     background: white;
@@ -413,6 +427,72 @@
 }
 </style>
 
+{% macro card_grid(entries, grid_class='nano-grid-3') %}
+    <div class="{{ grid_class }}">
+        {% for entry in entries %}
+            <div class="nano-card">
+                <div class="nano-card-header">
+                    <div class="nano-card-title">{{ entry.title }}</div>
+                </div>
+                <div class="nano-card-content">
+                    {{ entry.content|raw }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro criteria_list(items) %}
+    <ul class="nano-criteria-list">
+        {% for item in items %}
+            <li class="nano-criteria-item">{{ item|raw }}</li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% set important_dates = [] %}
+{% for i, item in node.field_fechas_titulo %}
+    {% set date_html %}
+        <div class="fecha">{{ node.field_fechas_dia_mes[i].value }}</div>
+        <div class="descripcion">{{ node.field_fechas_descripcion[i].value }}</div>
+        {% if node.field_fechas_badge[i].value %}
+            <p><span class="nano-badge nano-badge-secondary">{{ node.field_fechas_badge[i].value }}</span></p>
+        {% endif %}
+    {% endset %}
+    {% set important_dates = important_dates|merge([{'title': '📅 ' ~ item.value, 'content': date_html}]) %}
+{% endfor %}
+
+{% set document_items = [] %}
+{% for i, documento in node.field_documentos_titulo %}
+    {% set doc_html %}
+        <div class="doc-item" style="text-align:center;">
+            <div class="doc-icon">
+                <div class="doc-icon-bg">
+                    <span class="nano-icon nano-icon-slate">📄</span>
+                </div>
+            </div>
+            <div class="doc-title">{{ documento.value }}</div>
+            <div class="doc-desc">{{ node.field_documentos_descripcion[i].value }}</div>
+        </div>
+    {% endset %}
+    {% set document_items = document_items|merge([{'title': '', 'content': doc_html}]) %}
+{% endfor %}
+
+{# New logic for Criteria using field_criterios_items #}
+{% set criterios_list = [] %}
+{% for item in node.field_criterios_items %}
+    {% if item.value %}
+        {% set criterios_list = criterios_list|merge([item.value]) %}
+    {% endif %}
+{% endfor %}
+
+{% set compromisos = [] %}
+{% for compromiso in node.field_compromisos_descripcion %}
+    {% if compromiso.value %}
+        {% set compromisos = compromisos|merge([compromiso.value]) %}
+    {% endif %}
+{% endfor %}
+
 <div{{ attributes.addClass('nanoandes-content') }}>
     <!-- Header -->
     <div class="nano-header">
@@ -433,20 +513,9 @@
         <!-- Fechas Importantes -->
         <section class="nano-section nano-fechas">
             <h3>{{ 'Important Dates' | t }}</h3>
-            <div class="nano-grid-3">
-                {% for i, fecha in node.field_fechas_titulo %}
-                    <div class="nano-card">
-                        <div class="nano-card-header">
-                            <div class="nano-card-title">📅 {{ fecha.value }}</div>
-                        </div>
-                        <div class="nano-card-content">
-                            {% if node.field_fechas_descripcion[i] %}
-                                {{ node.field_fechas_descripcion[i].value }}
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+            {% if important_dates %}
+                {{ _self.card_grid(important_dates, 'nano-grid-3') }}
+            {% endif %}
             <div class="nano-nota">
                 <p><strong>{{ 'Note:' | t }}</strong> {{ node.field_nota_fechas.value | default('No second call will be made if the number of applications exceeds 200 candidates.' | t) | raw }}</p>
             </div>
@@ -455,27 +524,31 @@
         <section class="nano-section nano-requisitos">
             <h3>{{ 'Application Requirements' | t }}</h3>
             <div class="nano-grid-2">
-                {{ node.field_requisitos_contenido.value | raw }}
+                {% if node.field_requisitos_categoria|length > 0 %}
+                    {% for i, cat in node.field_requisitos_categoria %}
+                        <div class="nano-card">
+                            <div class="nano-card-header">
+                                <div class="nano-card-title">
+                                    <span class="nano-icon nano-icon-blue">✓</span> {{ cat.value }}
+                                </div>
+                            </div>
+                            <div class="nano-card-content">
+                                {{ node.field_requisitos_items[i].value | raw }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {{ node.field_requisitos_contenido.value | raw }}
+                {% endif %}
             </div>
         </section>
         <!-- Documentos -->
         <section class="nano-section nano-documentos">
             <div style="background-color:white;border-radius:0.5rem;border:1px solid #e2e8f0;padding:2rem;">
                 <h3>{{ 'Required Documents' | t }}</h3>
-                <div class="nano-grid-4">
-                    {% for i, documento in node.field_documentos_titulo %}
-                        <div class="nano-card">
-                            <div class="nano-card-header">
-                                <div class="nano-card-title">📄 {{ documento.value }}</div>
-                            </div>
-                            <div class="nano-card-content">
-                                {% if node.field_documentos_descripcion[i] %}
-                                    {{ node.field_documentos_descripcion[i].value }}
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                {% if document_items %}
+                    {{ _self.card_grid(document_items, 'nano-grid-4') }}
+                {% endif %}
             </div>
         </section>
         <!-- Procedimiento -->
@@ -495,7 +568,32 @@
             <h3>{{ 'Selection Criteria' | t }}</h3>
             <div class="nano-card">
                 <div class="nano-card-content" style="padding:2rem;">
-                    {{ node.field_criterios_contenido.value | raw }}
+                    {% if criterios_list|length > 0 %}
+                        <div class="nano-grid-2">
+                            {% set total_c = criterios_list|length %}
+                            {% set half = (total_c / 2)|round(0, 'ceil') %}
+                            <div>
+                                {% for i in 0..(half - 1) %}
+                                    {% if criterios_list[i] %}
+                                        <div class="criterio-item">
+                                            <span class="nano-icon nano-icon-slate">⭐</span> <span>{{ criterios_list[i]|raw }}</span>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div>
+                                {% if total_c > 1 %}
+                                    {% for i in half..(total_c - 1) %}
+                                        <div class="criterio-item">
+                                            <span class="nano-icon nano-icon-slate">⭐</span> <span>{{ criterios_list[i]|raw }}</span>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% else %}
+                        {{ node.field_criterios_contenido.value | raw }}
+                    {% endif %}
                 </div>
             </div>
         </section>
@@ -512,10 +610,10 @@
         <section class="nano-section nano-compromisos">
             <h3>{{ 'Selected Students\' Commitments' | t }}</h3>
             <div class="nano-grid-2">
-                {% for compromiso in node.field_compromisos_descripcion %}
+                {% for compromiso in compromisos %}
                     <div class="nano-card">
                         <div class="nano-card-content">
-                            <div style="font-size:1rem;line-height:1.6;">{{ compromiso.value }}</div>
+                            <div style="font-size:1rem;line-height:1.6;">{{ compromiso|raw }}</div>
                         </div>
                     </div>
                 {% endfor %}

@@ -24,25 +24,32 @@ class InstallFields {
       'hero_descripcion' => ['label' => 'Hero - Subtítulo', 'type' => 'string', 'cardinality' => 1, 'required' => FALSE],
       'objetivo_contenido' => ['label' => 'Objetivo - Contenido', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
       
-      // Fechas Importantes - campos simples (sin HTML)
-      'fechas_titulo' => ['label' => 'Fechas - Título/Fecha', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
-      'fechas_descripcion' => ['label' => 'Fechas - Descripción', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
+      // Fechas Importantes
+      'fechas_titulo' => ['label' => 'Fechas - Título (ej. Application Deadline)', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
+      'fechas_dia_mes' => ['label' => 'Fechas - Día/Mes (ej. May 25)', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
+      'fechas_descripcion' => ['label' => 'Fechas - Descripción corta (ej. 1st call)', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
+      'fechas_badge' => ['label' => 'Fechas - Badge (ej. Deadline)', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
       'nota_fechas' => ['label' => 'Nota de Fechas', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
       
-      'requisitos_contenido' => ['label' => 'Requisitos - Contenido', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
+      // Requisitos
+      'requisitos_categoria' => ['label' => 'Requisitos - Categoría', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
+      'requisitos_items' => ['label' => 'Requisitos - Items (HTML)', 'type' => 'text_long', 'cardinality' => -1, 'required' => FALSE],
       
-      // Documentos - campos simples
+      // Documentos
       'documentos_titulo' => ['label' => 'Documentos - Título', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
       'documentos_descripcion' => ['label' => 'Documentos - Descripción', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
       
       'procedimiento_contenido' => ['label' => 'Procedimiento - Contenido', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
-      'criterios_contenido' => ['label' => 'Criterios - Contenido', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
+      
+      // Criterios (Repetible simple)
+      'criterios_items' => ['label' => 'Criterios - Item individual', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
+      
       'becas_contenido' => ['label' => 'Becas - Contenido', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
       
-      // Compromisos - campo simple repetible
-      'compromisos_descripcion' => ['label' => 'Compromisos - Descripción', 'type' => 'text', 'cardinality' => -1, 'required' => FALSE],
+      // Compromisos
+      'compromisos_descripcion' => ['label' => 'Compromisos - Descripción', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
       
-      'contacto_email' => ['label' => 'Contacto - Email', 'type' => 'email', 'cardinality' => 1, 'required' => FALSE],
+      'contacto_email' => ['label' => 'Contacto - Email', 'type' => 'string', 'cardinality' => 1, 'required' => FALSE],
       'contacto_contenido' => ['label' => 'Contacto - Información Adicional', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
     ];
 
