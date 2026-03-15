@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Pre Nanomer Edition 8.0\n"
+"Project-Id-Version: pre_nanomer_edition 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -56,3 +56,9 @@ msgstr "Aucun deuxième appel ne sera lancé si le nombre de candidatures dépas
 
 msgid "XIV International School NanoAndes Organizing Committee<br>Scientific and Student Selection Committee"
 msgstr "Comité d'Organisation de l'École Internationale NanoAndes XIV<br>Comité de Sélection Scientifique et Étudiante"
+
+msgid "To strengthen the advanced training of Latin American students in the field of <span class=\"highlight\">nanotechnology applied to health, environment</span> and other strategic areas, through active participation in theoretical and practical sessions, lectures and scientific discussions."
+msgstr "Renforcer la formation avancée des étudiants latino-américains dans le domaine de la <span class=\"highlight\">nanotechnologie appliquée à la santé, à l'environnement</span> et à d'autres domaines stratégiques, grâce à une participation active à des sessions théoriques et pratiques, des conférences et des discussions scientifiques."
+
+msgid "No criteria defined."
+msgstr "Aucun critère défini."

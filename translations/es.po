@@ -56,3 +56,9 @@ msgstr "No se realizará una segunda convocatoria si el número de solicitudes s
 
 msgid "XIV International School NanoAndes Organizing Committee<br>Scientific and Student Selection Committee"
 msgstr "Comité Organizador de la Escuela Internacional NanoAndes XIV<br>Comité de Selección Científica y de Estudiantes"
+
+msgid "To strengthen the advanced training of Latin American students in the field of <span class=\"highlight\">nanotechnology applied to health, environment</span> and other strategic areas, through active participation in theoretical and practical sessions, lectures and scientific discussions."
+msgstr "Fortalecer la formación avanzada de estudiantes latinoamericanos en el campo de la <span class=\"highlight\">nanotecnología aplicada a la salud, el medio ambiente</span> y otras áreas estratégicas, a través de la participación activa en sesiones teóricas y prácticas, conferencias y discusiones científicas."
+
+msgid "No criteria defined."
+msgstr "No se han definido criterios."
