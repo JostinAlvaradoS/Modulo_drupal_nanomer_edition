@@ -11,6 +11,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\pathauto\Entity\PathautoPattern;
 
 class InstallFields {
 
@@ -190,6 +191,37 @@ class InstallFields {
 
     $entity_form_display->save();
     $entity_view_display->save();
+
+    // Crear el patrón de Pathauto de forma programática.
+    try {
+      if (!PathautoPattern::load('pre_nanomer_edition_pattern')) {
+        $pattern = PathautoPattern::create([
+          'id' => 'pre_nanomer_edition_pattern',
+          'label' => 'Pattern for Pre Nanomer Edition nodes',
+          'type' => 'canonical_entities:node',
+          'pattern' => 'edicion/[node:title]',
+          'selection_criteria' => [
+            'node_bundle' => [
+              'id' => 'entity_bundle:node',
+              'bundles' => [
+                'pre_nanomer_edition' => 'pre_nanomer_edition',
+              ],
+              'negate' => false,
+              'context_mapping' => [
+                'node' => 'node',
+              ],
+            ],
+          ],
+          'selection_logic' => 'and',
+          'weight' => 0,
+        ]);
+        $pattern->save();
+        \Drupal::logger('pre_nanomer_edition')->info('Pathauto pattern created: pre_nanomer_edition_pattern');
+      }
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('pre_nanomer_edition')->error('Error creating Pathauto pattern: @error', ['@error' => $e->getMessage()]);
+    }
     
     \Drupal::logger('pre_nanomer_edition')->info('Fields installation completed successfully');
   }
@@ -200,31 +232,52 @@ class InstallFields {
   public static function deleteFields() {
     \Drupal::logger('pre_nanomer_edition')->info('=== STARTING FIELD DELETION ===');
 
-    // Usar la misma definición de campos
+    // Eliminar el patrón de Pathauto.
+    try {
+      $pattern = PathautoPattern::load('pre_nanomer_edition_pattern');
+      if ($pattern) {
+        $pattern->delete();
+        \Drupal::logger('pre_nanomer_edition')->info('Pathauto pattern deleted: pre_nanomer_edition_pattern');
+      }
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('pre_nanomer_edition')->error('Error deleting Pathauto pattern: @error', ['@error' => $e->getMessage()]);
+    }
+
+    // Definición de campos simples que se iteran automáticamente en la plantilla
     $secciones = [
       'hero_titulo' => ['label' => 'Hero - Título Principal', 'type' => 'string', 'cardinality' => 1, 'required' => FALSE],
       'hero_descripcion' => ['label' => 'Hero - Subtítulo', 'type' => 'string', 'cardinality' => 1, 'required' => FALSE],
       'objetivo_contenido' => ['label' => 'Objetivo - Contenido', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
       
-      // Fechas Importantes - campos simples (sin HTML)
-      'fechas_titulo' => ['label' => 'Fechas - Título/Fecha', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
-      'fechas_descripcion' => ['label' => 'Fechas - Descripción', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
+      // Fechas Importantes
+      'fechas_titulo' => ['label' => 'Fechas - Título (ej. Application Deadline)', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
+      'fechas_dia_mes' => ['label' => 'Fechas - Día/Mes (ej. May 25)', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
+      'fechas_descripcion' => ['label' => 'Fechas - Descripción corta (ej. 1st call)', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
+      'fechas_badge' => ['label' => 'Fechas - Badge (ej. Deadline)', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
       'nota_fechas' => ['label' => 'Nota de Fechas', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
       
-      'requisitos_contenido' => ['label' => 'Requisitos - Contenido', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
+      // Requisitos
+      'requisitos_categoria' => ['label' => 'Requisitos - Categoría', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
+      'requisitos_items' => ['label' => 'Requisitos - Items (HTML)', 'type' => 'text_long', 'cardinality' => -1, 'required' => FALSE],
       
-      // Documentos - campos simples
+      // Documentos
       'documentos_titulo' => ['label' => 'Documentos - Título', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
       'documentos_descripcion' => ['label' => 'Documentos - Descripción', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
       
       'procedimiento_contenido' => ['label' => 'Procedimiento - Contenido', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
-      'criterios_contenido' => ['label' => 'Criterios - Contenido', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
+      
+      // Criterios (Repetible simple)
+      'criterios_items' => ['label' => 'Criterios - Item individual', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
+      
       'becas_contenido' => ['label' => 'Becas - Contenido', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
       
-      // Compromisos - campo simple repetible
-      'compromisos_descripcion' => ['label' => 'Compromisos - Descripción', 'type' => 'text', 'cardinality' => -1, 'required' => FALSE],
+      // Compromisos
+      'compromisos_descripcion' => ['label' => 'Compromisos - Descripción', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
       
-      'contacto_email' => ['label' => 'Contacto - Email', 'type' => 'email', 'cardinality' => 1, 'required' => FALSE],
+      'edicion_imagen' => ['label' => 'Imagen de la Edición', 'type' => 'image', 'cardinality' => 1, 'required' => FALSE],
+
+      'contacto_email' => ['label' => 'Contacto - Email', 'type' => 'string', 'cardinality' => 1, 'required' => FALSE],
       'contacto_contenido' => ['label' => 'Contacto - Información Adicional', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
     ];
 

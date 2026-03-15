@@ -10,3 +10,4 @@ dependencies:
   - drupal:ckeditor5
   - drupal:image
   - drupal:file
+  - drupal:pathauto
