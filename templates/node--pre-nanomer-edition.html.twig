@@ -612,8 +612,11 @@
             <div class="nano-grid-2">
                 {% for compromiso in compromisos %}
                     <div class="nano-card">
-                        <div class="nano-card-content">
-                            <div style="font-size:1rem;line-height:1.6;">{{ compromiso|raw }}</div>
+                        <div class="nano-card-content" style="padding: 1.5rem;">
+                            <div class="compromiso-item" style="display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0;">
+                                <span class="nano-icon nano-icon-slate">✓</span>
+                                <span style="font-size: 1.3rem; color: #334155; font-weight: 500; line-height: 1.6;">{{ compromiso|raw }}</span>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
