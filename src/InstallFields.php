@@ -50,12 +50,6 @@ class InstallFields {
       // Compromisos
       'compromisos_descripcion' => ['label' => 'Compromisos - Descripción', 'type' => 'string', 'cardinality' => -1, 'required' => FALSE],
       
-      // Footer/Support Sections (Prefixed with _pre to avoid collisions with post_nanomer_edition)
-      'support_enabling_pre' => ['label' => 'Institutions Enabling this Edition (Logos)', 'type' => 'image', 'cardinality' => -1, 'required' => FALSE],
-      'support_sponsors_pre' => ['label' => 'Sponsors (Logos)', 'type' => 'image', 'cardinality' => -1, 'required' => FALSE],
-      'support_collaborating_pre' => ['label' => 'Collaborating Institutions (Logos)', 'type' => 'image', 'cardinality' => -1, 'required' => FALSE],
-      'edicion_imagen_pre' => ['label' => 'Imagen de la Edición (para carrusel)', 'type' => 'image', 'cardinality' => 1, 'required' => FALSE],
-      
       'contacto_email' => ['label' => 'Contacto - Email', 'type' => 'string', 'cardinality' => 1, 'required' => FALSE],
       'contacto_contenido' => ['label' => 'Contacto - Información Adicional', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
     ];
@@ -284,13 +278,10 @@ class InstallFields {
       'support_sponsors_pre' => ['label' => 'Sponsors (Logos)', 'type' => 'image', 'cardinality' => -1, 'required' => FALSE],
       'support_collaborating_pre' => ['label' => 'Collaborating Institutions (Logos)', 'type' => 'image', 'cardinality' => -1, 'required' => FALSE],
       'edicion_imagen_pre' => ['label' => 'Imagen de la Edición (para carrusel)', 'type' => 'image', 'cardinality' => 1, 'required' => FALSE],
-
-      'contacto_email' => ['label' => 'Contacto - Email', 'type' => 'string', 'cardinality' => 1, 'required' => FALSE],
-      'contacto_contenido' => ['label' => 'Contacto - Información Adicional', 'type' => 'text_long', 'cardinality' => 1, 'required' => FALSE],
     ];
 
-    // PASO 1: Eliminar EntityFormDisplay y EntityViewDisplay (PRIMERO)
-    \Drupal::logger('pre_nanomer_edition')->info('STEP 1: Deleting EntityFormDisplay and EntityViewDisplay');
+    // PASO 1: Eliminar EntityDisplays (PRIMERO)
+    \Drupal::logger('pre_nanomer_edition')->info('STEP 1: Deleting EntityDisplays');
     try {
       $entity_form_display = EntityFormDisplay::load('node.pre_nanomer_edition.default');
       if ($entity_form_display) {

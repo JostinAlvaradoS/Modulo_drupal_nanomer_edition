@@ -634,35 +634,6 @@
                 </div>
             </div>
         </section>
-
-        {# Instituciones de Apoyo (Carrusel de Logos) - PRE VERSION #}
-        {% set support_groups = [
-            {'title': 'Instituciones que hacen posible esta edición', 'field': node.field_support_enabling_pre},
-            {'title': 'Auspiciadores', 'field': node.field_support_sponsors_pre},
-            {'title': 'Instituciones colaboradoras', 'field': node.field_support_collaborating_pre}
-        ] %}
-
-        {% for group in support_groups %}
-            {% if group.field|length > 0 %}
-                <section class="nano-section">
-                    <h3 style="font-size: 2.2rem; margin-bottom: 2rem;">{{ group.title | t }}</h3>
-                    <div class="logo-carousel-container">
-                        <div class="logo-track">
-                            {# Duplicamos los logos 3 veces para asegurar que el carrusel sea fluido #}
-                            {% for i in 1..3 %}
-                                {% for item in group.field %}
-                                    {% if item.entity %}
-                                        <div class="logo-item">
-                                            <img src="{{ file_url(item.entity.fileuri) }}" alt="Logo" class="support-logo">
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endfor %}
-                        </div>
-                    </div>
-                </section>
-            {% endif %}
-        {% endfor %}
     </div>
 </div>
 
